@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>amcharts</title>
+    <script src="https://cdn.amcharts.com/lib/4/core.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/themes/material.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/lang/de_DE.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/geodata/germanyLow.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/fonts/notosans-sc.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
+    <script src="data.js"></script>
+  </head>
+  <body>
+
+  <div id="chartdiv" style="width: 1000px; height: 400px;"></div>
+
+  <script>
+    function am4themes_ucdn(target) {
+      if (target instanceof am4core.InterfaceColorSet) {
+        target.setFor("grid", am4core.color("grey"));
+      }
+    }
+
+    // Themes begin
+    am4core.useTheme(am4themes_animated);
+    am4core.useTheme(am4themes_ucdn);
+    // Themes end
+
+    var chart = am4core.create("chartdiv", am4charts.XYChart);
+    chart.paddingRight = 20;
+
+    chart.data = data;
+
+    var dateAxis = chart.xAxes.push(new am4charts.DateAxis());
+    dateAxis.title.text = "Date";
+    dateAxis.renderer.grid.template.location = 0;
+    dateAxis.minZoomCount = 5;
+
+    // this makes the data to be grouped
+    dateAxis.groupData = true;
+    dateAxis.groupCount = 1000;
+    dateAxis.baseInterval = {
+      "timeUnit": "minute",
+      "count": 5
+    }
+
+    var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+    valueAxis.title.text = "Traffic";
+
+    var series = chart.series.push(new am4charts.LineSeries());
+    series.dataFields.dateX = "date";
+    series.dataFields.valueY = "bytes_served";
+    series.tooltipText = "{date.formatDate('yyyy-mm-dd HH:mm')}, Bytes_served: {valueY.formatNumber('#.#######################b')}";
+    series.tooltip.pointerOrientation = "vertical";
+    series.tooltip.background.fillOpacity = 0.9;
+    series.tooltip.background.fill = am4core.color("16b0bf");
+    series.fillOpacity = 0.8;
+    series.fill = am4core.color("#16b0bf");
+
+    chart.numberFormatter.bigNumberPrefixes = [
+      { "number": 1e+3, "suffix": "KB" },
+      { "number": 1e+6, "suffix": "MB" },
+      { "number": 1e+9, "suffix": "GB" },
+      { "number": 1e+12, "suffix": "TB" },
+      { "number": 1e+15, "suffix": "PB" }
+    ];
+
+    valueAxis.numberFormatter.numberFormat = "#,###.00a";
+    valueAxis.adjustLabelPrecision = false;
+    valueAxis.events.on("ready", function(ev) {
+      ev.target.min = ev.target.min;
+      ev.target.max = ev.target.max;
+    })
+
+    chart.cursor = new am4charts.XYCursor();
+    chart.cursor.xAxis = dateAxis;
+
+    var scrollbarX = new am4core.Scrollbar();
+    scrollbarX.marginBottom = 20;
+    chart.scrollbarX = scrollbarX;
+
+    valueAxis.min = 0;
+    valueAxis.adjustLabelPrecision = true;
+    valueAxis.strictMin = true;
+    </script>
+
+  </body>
+</html>

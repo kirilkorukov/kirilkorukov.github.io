@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>amcharts</title>
+    <script src="https://cdn.amcharts.com/lib/4/core.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/themes/material.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/lang/de_DE.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/geodata/germanyLow.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/fonts/notosans-sc.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
+    <script src="data.js"></script>
+  </head>
+  <body>
+
+  <div id="chartdiv" style="width: 1000px; height: 400px;"></div>
+
+  <script>
+  // Create chart instance
+  var chart = am4core.create("chartdiv", am4charts.PieChart);
+
+  chart.data = [{
+  "country": "Lithuania",
+  "litres": 501.9
+  }, {
+  "country": "Czech Republic",
+  "litres": 301.9
+  }, {
+  "country": "Ireland",
+  "litres": 201.1
+  }, {
+  "country": "Germany",
+  "litres": 165.8
+  }, {
+  "country": "Australia",
+  "litres": 139.9
+  }, {
+  "country": "Austria",
+  "litres": 128.3
+  }, {
+  "country": "UK",
+  "litres": 99
+  }, {
+  "country": "Belgium",
+  "litres": 60
+  }, {
+  "country": "The Netherlands",
+  "litres": 50
+  }, {
+  "country": "The Netherlands",
+  "litres": 50
+  }, {
+  "country": "The Netherlands",
+  "litres": 50
+  }, {
+  "country": "The Netherlands",
+  "litres": 50
+  }, {
+  "country": "The Netherlands",
+  "litres": 50
+  }, {
+  "country": "The Netherlands",
+  "litres": 50
+  }, {
+  "country": "The Netherlands",
+  "litres": 50
+  }, {
+  "country": "The Netherlands",
+  "litres": 50
+  }, {
+  "country": "The Netherlands",
+  "litres": 50
+  }, {
+  "country": "The Netherlands",
+  "litres": 50
+  }, {
+  "country": "The Netherlands",
+  "litres": 50
+  }, {
+  "country": "The Netherlands",
+  "litres": 50
+  }, {
+  "country": "The Netherlands",
+  "litres": 50
+  }, {
+  "country": "The Netherlands",
+  "litres": 50
+  }, {
+  "country": "The Netherlands",
+  "litres": 50
+  }, {
+  "country": "The Netherlands",
+  "litres": 50
+  }, {
+  "country": "The Netherlands",
+  "litres": 50
+  }, {
+  "country": "The Netherlands",
+  "litres": 50
+  }, {
+  "country": "The Netherlands",
+  "litres": 50
+  }, {
+  "country": "The Netherlands",
+  "litres": 50
+  }, {
+  "country": "The Netherlands",
+  "litres": 50
+  }, {
+  "country": "The Netherlands",
+  "litres": 50
+  }, {
+  "country": "The Netherlands",
+  "litres": 50
+  }, {
+  "country": "The Netherlands",
+  "litres": 50
+  }, {
+  "country": "The Netherlands",
+  "litres": 50
+  }, {
+  "country": "The Netherlands",
+  "litres": 50
+  }, {
+  "country": "The Netherlands",
+  "litres": 50
+  }, {
+  "country": "The Netherlands",
+  "litres": 50
+  }, {
+  "country": "The Netherlands",
+  "litres": 50
+  }];
+
+    // Add and configure Series
+  var pieSeries = chart.series.push(new am4charts.PieSeries());
+  pieSeries.dataFields.value = "litres";
+  pieSeries.dataFields.category = "country";
+  </script>
+
+  </body>
+</html>
